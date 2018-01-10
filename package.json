@@ -5,14 +5,16 @@
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
     "start": "npm run startExtend -s",
-    "startExtend": "npm-run-all --parallel security-check open:src typescript:watch lint:watch",
+    "startExtend": "npm-run-all --parallel security-check open:src typescript:watch lint:watch test:watch",
     "typescript:watch": "tsc --watch",
     "open:src": "babel-node buildScripts/srcServer.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000 --subdomain lekrans",
     "share": "npm-run-all --parallel open:src localtunnel",
     "lint": "esw webpack.config.* src buildScripts --color",
-    "lint:watch" : "npm run lint -- --watch"
+    "lint:watch" : "npm run lint -- --watch",
+    "test": "mocha --reporter progress buildScripts/testSetup.js  \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
 
   },
   "author": "Cory House",
